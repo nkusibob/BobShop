@@ -1,0 +1,114 @@
+﻿@model Mvc.Models.Category
+
+<div class="row">
+    <div class="col-md-2">
+        <h1>@Model.CategoryName</h1>
+        <h2>
+
+            <img src="@Model.Medium.MediaUrl" width="180"/>
+
+        </h2>
+
+    </div>
+    <div class="col-md-8">
+    @foreach (var p in Model.Products)
+    { 
+        <hr />
+        <div class="row">
+
+            @*
+@*
+        <div class="display-field">
+            @p.Medium.MediaUrl
+        </div>
+	<div class="display-field">
+             @p.Medium.MediaUrl
+	</div>*@
+
+            <div class="col-md-6">
+                <a href="images/detail1.jpg" class="">
+                    <img src="@p.Medium.MediaUrl" alt="@p.Medium.MediaAlt" width="280"></a>
+            </div>
+            <div class="col-md-6">
+                <a href="images/detail1.jpg" class="sp-current">
+                    <img src="images/detail1-s.jpg" alt=""></a><a href="images/detail2.jpg">
+                        <img src="images/detail2-s.jpg" alt=""></a><a href="images/detail3.jpg">
+                            <img src="images/detail3-s.jpg" alt=""></a><a href="images/detail1.jpg">
+                                <img src="images/detail1-s.jpg" alt=""></a><a href="images/detail2.jpg">
+                                    <img src="images/detail2-s.jpg" alt=""></a>
+
+            </div>
+            <div class="col-md-6">
+                <h4>@p.ProductLongDescription</h4>
+            </div>
+            <span class="col-md-6">@p.ProductName</span>
+
+            <div class="col-md-6">
+                <h4>@p.ProductDescription</h4>
+            </div>
+            @*<div class="display-field">
+	   <h4>@p.ProductLongDescription</h4>
+	</div>*@
+            <div class="col-md-6">
+                <h3>@p.Prices.Where(a => a.PriceDate < DateTime.Now).OrderByDescending(d => d.PriceDate).FirstOrDefault().PriceValue</h3>
+            </div>
+
+        </div>
+    
+    }
+</div>
+</div>
+@*<div class="sp-wrap" style="display: inline-block;">
+
+   <div class="display-field">
+		@Model.MediaID
+	</div>
+	<div class="display-field">
+		@Model.MediaID
+	</div>
+
+
+
+	  <div class="sp-large"><a href="images/detail1.jpg" class="">
+			<img src="@Model.Medium.MediaUrl" alt="@Model.Medium.MediaAlt" width="280"></a></div>
+		<div class="sp-thumbs sp-tb-active"><a href="images/detail1.jpg" class="sp-current">
+			<img src="images/detail1-s.jpg" alt=""></a><a href="images/detail2.jpg">
+				<img src="images/detail2-s.jpg" alt=""></a><a href="images/detail3.jpg">
+					<img src="images/detail3-s.jpg" alt=""></a><a href="images/detail1.jpg">
+						<img src="images/detail1-s.jpg" alt=""></a><a href="images/detail2.jpg">
+							<img src="images/detail2-s.jpg" alt=""></a></div>
+	</div>
+	   <span class="title"> @Model.ProductName</span>
+    
+	<div class="display-field">
+	   <h4> @Model.ProductDescription</h4>
+	</div>
+	<hr>
+    
+
+					
+	<h3>@Model.Prices.Where(a => a.PriceDate > DateTime.Now).OrderByDescending(p => p.PriceDate).FirstOrDefault().PriceValue</h3>
+	<div class="input-qty-detail">
+		<div class="input-group bootstrap-touchspin" style=""><span class="input-group-btn">
+			<button class="btn btn-default bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix"></span><input type="text" class="form-control input-qty text-center" value="1"><span class="input-group-addon bootstrap-touchspin-postfix"></span><span class="input-group-btn">
+				<button class="btn btn-default bootstrap-touchspin-up" type="button">+</button></span></div>
+		<button class="btn btn-primary pull-left">add to cart</button>
+	</div>
+	<br>
+	<hr>
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		<a class="addthis_button_facebook addthis_button_preferred_1 at300b" title="Facebook" href="https://fr-fr.facebook.com/"><span class=" at300bs at15nc at15t_facebook"><span class="at_a11y">Share on facebook</span></span></a>
+		<a class="addthis_button_twitter addthis_button_preferred_2 at300b" title="Tweet" href="https://twitter.com/"><span class=" at300bs at15nc at15t_twitter"><span class="at_a11y">Share on twitter</span></span></a>
+		<a class="addthis_button_email addthis_button_preferred_3 at300b" target="_blank" title="Email" href="https://www.google.com/intl/fr/mail/help/about.html"><span class=" at300bs at15nc at15t_email"><span class="at_a11y">Share on email</span></span></a>
+		<a class="addthis_button_print addthis_button_preferred_4 at300b" title="Print" href="#"><span class=" at300bs at15nc at15t_print"><span class="at_a11y">Share on print</span></span></a>
+		<a class="addthis_button_compact at300m" href="#"><span class=" at300bs at15nc at15t_compact"><span class="at_a11y">More Sharing Services</span></span></a>
+		<div class="atclear"></div>
+	</div>
+	<script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-4f0c254f1302adf8"></script>
+	<div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;">
+		<iframe id="_atssh716" title="AddThis utility frame" src="//ct1.addthis.com/static/r07/sh158.html#iit=1400659977452&amp;tmr=load%3D1400659971687%26core%3D1400659971861%26main%3D1400659977440%26ifr%3D1400659977465&amp;cb=0&amp;cdn=1&amp;chr=UTF-8&amp;kw=&amp;ab=-&amp;dh=&amp;dr=&amp;du=file%3A%2F%2F%2FZ%3A%2Fproducts-WB094DPGC%2Fdetail.html&amp;dt=Product%20Detail%20-%20Mimity&amp;dbg=0&amp;md=0&amp;cap=tc%3D0%26ab%3D0&amp;inst=1&amp;vcl=0&amp;jsl=1&amp;prod=undefined&amp;lng=fr&amp;ogt=&amp;pc=men&amp;pub=xa-4f0c254f1302adf8&amp;ssl=0&amp;sid=537c6003910e86c2&amp;srpl=1&amp;srcs=1&amp;srd=1&amp;srf=1&amp;srx=1&amp;ver=300&amp;xck=0&amp;xtr=0&amp;og=&amp;aa=0&amp;csi=undefined&amp;rev=1399981304&amp;ct=1&amp;xld=1&amp;xd=1" style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px; left: 0px; top: 0px;"></iframe>
+	</div>
+	<script type="text/javascript" src="http://ct1.addthis.com/static/r07/core131.js"></script>
+
+
+ *@

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Mvc.Models.Category>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+  
+   
+    <div class="container main-container">
+            <div class="row">
+                <div class="col-lg-9 col-md-9 col-sm-12">
+
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-lg- col-md-4 col-sm-3 hero-feature text-center">
+                            <div class="thumbnail">
+                                <a href="@Url.Action("Details", "Category", new { id = item.CategoryID})">
+                                    <img src="@item.Medium.MediaUrl" alt="@item.Medium.MediaAlt" style="min-height:200px;height:250px;">
+
+                                </a>
+
+
+
+                                @Html.ActionLink(item.CategoryName, "Details", "Category", new { id = item.CategoryID }, new { @class = "btn btn-primary" })
+
+                                <div>
+
+                                    <p style="width: auto; height:50px;margin-top :4px">
+                                        @Html.DisplayFor(modelItem => item.CategoryDescription)
+                                    </p>
+
+
+                                </div>
+                            </div>
+                          </div>
+
+                    }
+                </div>
+            </div>
+
+    </div>
+
+
+</body>
+</html>

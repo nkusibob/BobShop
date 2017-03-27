@@ -1,0 +1,276 @@
+@model IEnumerable<Mvc.Models.Product>
+
+@{
+    ViewBag.Title = "Home Page";
+
+}
+@using Mvc.Models;
+@*@if (User.Identity.IsAuthenticated)
+    {
+        Response.Redirect(Url.Action("Index", "Home", new { area = "Admin" }, null));
+    }*@
+
+<div class="container main-container" >
+    <div class="hero-unit">
+        <h1>Welcome</h1>
+    </div>
+  
+    @*-------------------Slider-----------------------------*@
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div id="myCarousel2" class="carousel slide">
+                <!-- Carousel items -->
+
+                <div class="carousel-inner" style="width: 100%; overflow: hidden; position: relative; height: 450px">
+                    <div class="item active"><img src="~/images/15.jpg" height="150" alt="music"></div>
+                    <div class="item "><img src="~/images/5.jpg" height="150" alt="music"></div>       
+                    <div class="item "><img src="~/images/7.jpg" height="150" alt="music"></div>                          
+                     @foreach (var p in Model)
+                    {
+
+
+                        if (p.Medium.FirstOrDefault().MediaTypeID == 1)
+                        {
+                            <div class="item" style="list-style: none; position: relative">
+                                <img src="@p.Medium.LastOrDefault().MediaUrl" alt="" style="max-height:225px;height:220px;margin:2px 2px 2px 2px">
+                            </div>
+                        }
+                        else if (p.Medium.LastOrDefault().MediaTypeID == 4)
+                        {
+                            <div class="item"style="float:initial; list-style: none; position: relative;">
+                                <video src="@p.Medium.FirstOrDefault().MediaUrl" controls autoplay="autoplay" width="352" height="400" style="margin:2px 2px 2px 2px">
+                                    <source src="@p.Medium.LastOrDefault().MediaUrl" type="video/webm" />
+
+                                </video>
+                            </div>
+                         }
+                       
+
+
+
+                     }
+                    
+                </div>
+                
+                <!-- Carousel nav -->
+                <a class="carousel-control left" href="#myCarousel2" data-slide="prev"></a>
+                <a class="carousel-control right" href="#myCarousel2" data-slide="next"></a>
+                
+            </div>
+           
+          
+           
+        </div>
+        <div class="col-lg-3 visible-lg" >
+            <div class="row text-center" >
+                <div class="col-lg-12 col-md-12 hero-feature">
+                    <div class="thumbnail" style="height:450px">
+                        <a href="@Url.Action("Details", "Product", new { id = Model.Last().ProductID })" class="link-p first-p" style="overflow: hidden; position: relative;">
+                            <img src="@Model.Last().Medium.Last().MediaUrl" alt="" style="min-height:200px;height:250px;">
+                        </a>
+                        <div class="caption prod-caption">
+                            <h4><a href="@Url.Action("Details", "Product", new { id = Model.Last().ProductID })">@Model.Last().ProductDescription</a></h4>
+                            
+                            <p style="width: auto; height:50px;">@Model.Last().ProductLongDescription</p>                            
+                            <p>
+                            </p><div class="btn-group ">
+                                <a href="#" class="btn btn-default">@Model.Last().Prices.Last().PriceValue</a>
+                                <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                            </div>
+                            <p></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    @*-----------------------INNER NAVBAR (suppr la query)-------------------------------*@
+    <br />
+
+    <div class="navbar navbar-inverse">
+        <div class="navbar-inner">
+            <div class="container-fluid">
+
+                <div>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-ex2-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="navbar-collapse navbar-ex2-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <
+                            <li><a href="~/Home/Index">Home</a></li>
+                            @*dans le controlleur et via viewbag tu recupères*@
+                            @{
+
+                                foreach (Category cat in ViewBag.categorie)
+                                {
+
+                                    <li>@Html.ActionLink(@cat.CategoryName, "Details", "Category", new { id = cat.CategoryID }, null)</li>
+                                }}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-12">
+
+            <!-- Categories -->
+            <div class="col-lg-12 col-md-12 col-sm-6">
+                <div class="no-padding">
+                   
+
+                        <span class="title">CATEGORIES</span>
+                    
+                   
+                </div>
+                <div class="list-group list-categ">
+                    <div class="list-group ">
+                        @foreach (Category item in ViewBag.allcategorie)
+                        {
+                            <div class="list-group-item list-categ">
+
+                                @Html.ActionLink(item.CategoryName, "Details", "Category", new { id = item.CategoryID }, new { @class = "list-group-item" })
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- End Categories -->
+            <!-- Best Seller -->
+            <div class="col-lg-12 col-md-12 col-sm-6">
+                <div class="no-padding">
+                    <span class="title">BEST SELLER</span>
+                </div>
+                <div class="hero-feature">
+                    <div class="thumbnail text-center">
+                        <a href="@Url.Action("Details", "Product", new { id = Model.FirstOrDefault().ProductID })" class="link-p" style="overflow: hidden; position: relative;">
+                            <img src="@Model.FirstOrDefault().Medium.LastOrDefault().MediaUrl" alt="" style="min-height:200px;height:250px;">
+                        </a>
+                        <div class="caption prod-caption">
+                            <h4><a href="@Url.Action("Details", "Product", new { id = Model.FirstOrDefault().ProductID })">@Model.FirstOrDefault().ProductName.Substring(0, 1).ToUpper()@Model.FirstOrDefault().ProductName.Substring(1).ToLower()</a></h4>
+                            <p style="width: auto; height:50px;">@Model.FirstOrDefault().ProductDescription</p>
+                            <p>
+                            </p>
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-default">@Model.FirstOrDefault().Prices.OrderBy(pr => pr.PriceDate).LastOrDefault().PriceValue</a>
+                                @*                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>*@
+                                @Html.ActionLink("Buy!", "Create", "Cart", new { id = Model.FirstOrDefault().ProductID, quantity = 1 }, new { @class = "btn btn-primary" })
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-feature hidden-sm">
+                    <div class="thumbnail text-center">
+                        <a href="@Url.Action("Details", "Product", new { id = Model.LastOrDefault().ProductID })" class="link-p" style="overflow: hidden; position: relative;">
+                            <img src="@Model.Last().Medium.LastOrDefault().MediaUrl" alt="" style="min-height:200px;height:250px;">                        </a>
+                        <div class="caption prod-caption">
+                            <h4><a href="@Url.Action("Details", "Product", new { id = Model.LastOrDefault().ProductID })">@Model.LastOrDefault().ProductName.Substring(0, 1).ToUpper()@Model.LastOrDefault().ProductName.Substring(1).ToLower()</a></h4>
+                            <p style="width: auto; height:50px;">@Model.LastOrDefault().ProductDescription</p>
+                            <p>
+                            </p>
+                            <div class="btn-group">
+                                <a href="#" class="btn btn-default">@Model.LastOrDefault().Prices.OrderBy(pr => pr.PriceDate).LastOrDefault().PriceValue</a>
+                                @*                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>*@
+                                @Html.ActionLink("Buy!", "Create", "Cart", new { id = Model.LastOrDefault().ProductID, quantity = 1 }, new { @class = "btn btn-primary" })
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Best Seller -->
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            <div class="col-lg-12 col-sm-12">
+                <span class="title">FEATURED PRODUCTS</span>
+            </div>
+         @foreach (var p in Model)
+           {
+            <div class="col-lg-4 col-sm-4 hero-feature text-center" >
+                <div class="thumbnail" >
+                    <a href="@Url.Action("Details", "Product", new { id = p.ProductID })" class="link-p" style="overflow: hidden; ">
+
+
+
+                        @if (p.Medium.Count > 0)
+                        {
+                            <img src="@p.Medium.LastOrDefault().MediaUrl" alt="" style="min-height:200px;height:250px;">
+                        }
+                    </a>
+                    <div class="caption prod-caption">
+                        <h4><a href="@Url.Action("Details", "Product", new { id = p.ProductID })">@p.ProductName.Substring(0, 1).ToUpper()@p.ProductName.Substring(1).ToLower()</a></h4>
+                        <p style="width: auto; height:50px;">@p.ProductDescription</p>
+                        <p>
+                        </p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default">@p.Prices.OrderBy(pr => pr.PriceDate).FirstOrDefault().PriceValue</a>
+                            @*                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>*@
+                            @Html.ActionLink("Buy!", "Create", "Cart", new { id = p.ProductID, quantity = 1 }, new { @class = "btn btn-primary" })
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            }
+          
+            
+        
+           
+        </div>
+
+    </div>
+    @*--------------------------Affichage des products---------------------------*@
+
+    <br />
+
+    @*<div class="col-lg-10 col-md-10 col-sm-12">
+
+
+        <div class="col-lg-4 col-sm-4 hero-feature text-center">
+            <div class="no-padding">
+                <span class="title">CATEGORIES</span>
+            </div>
+
+           
+
+        </div>
+        <div class="col-lg-12 col-sm-12">
+            <span class="title">FEATURED PRODUCTS</span>
+        </div>
+
+        @foreach (var p in Model)
+        {
+            <div class="col-lg-4 col-sm-4 hero-feature text-center">
+                <div class="thumbnail">
+                 
+                </div>
+            </div>
+        }
+
+    </div>*@
+</div>
+<!-- Categories -->
+
+
+@*updater le userlastlogin (car ne fonctionne pas encore dans le controller Account/LogIn)*@
+@if (User.Identity.IsAuthenticated)
+{
+
+    vendrEntities dc = new vendrEntities();
+    var query = from u in dc.Users
+                where u.UserEmail == User.Identity.Name
+                select u;
+    User solution = query.First();
+    solution.UserLastLoginDate = DateTime.Now;
+    dc.SaveChanges();
+}

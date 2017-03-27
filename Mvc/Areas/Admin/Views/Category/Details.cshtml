@@ -1,0 +1,47 @@
+﻿@model Mvc.Models.Category
+
+
+<div class="row">
+    <div class="col-md-2">
+        <h1>@Model.CategoryName</h1>
+        <h2>
+
+            <img src="@Model.Medium.MediaUrl" width="180"/>
+
+        </h2>
+
+    </div>
+    <div class="col-md-8">
+    @foreach (var p in Model.Products)
+    { 
+        <hr />
+        <div class="row">
+
+         
+            <div class="col-md-6">
+                @if (p.Media.Count > 0)
+                {
+                    <div >
+                       
+                        
+                            <a href="@p.Media.ElementAt(0).MediaUrl"><img src="@p.Media.ElementAt(0).MediaUrl" width="150" /></a>
+                       
+                    </div>
+                }
+            </div>
+            <div class="col-md-6">
+                <h4>@p.ProductLongDescription</h4>
+            </div>
+            <span class="col-md-6">@p.ProductName</span>
+
+            <div class="col-md-6">
+                <h4>@p.ProductDescription</h4>
+            </div>
+     
+           
+
+        </div>
+    
+    }
+</div>
+</div>

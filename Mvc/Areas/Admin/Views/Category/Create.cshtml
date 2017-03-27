@@ -1,0 +1,76 @@
+﻿@model Mvc.Models.Category
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Create</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>Category</legend>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CategoryName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CategoryName)
+                @Html.ValidationMessageFor(model => model.CategoryName)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CategoryDescription)
+            </div>
+            <div class="editor-field" style="color:red">
+                @Html.EditorFor(model => model.CategoryDescription)
+                @Html.ValidationMessageFor(model => model.CategoryDescription)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CategoryIsMenu)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CategoryIsMenu)
+                @Html.ValidationMessageFor(model => model.CategoryIsMenu)
+            </div>
+    
+           <div>
+               <div class="editor-label">
+                   @Html.LabelFor(model => model.Medium, "MediaID")
+                   <div class="editor-field">
+                       @Html.DropDownList("MediaID", (IEnumerable<SelectListItem>)ViewBag.medium)
+                       @Html.ValidationMessageFor(model => model.MediaID)
+                   </div>
+               </div>
+           </div>
+            
+               
+                @*<div class="editor-label">
+                    @Html.LabelFor(model => model.Medium.MediaID)
+                </div>
+                <div class="editor-field" style="color: red">
+                    @Html.EditorFor(model => model.Medium.MediaID)
+                    @Html.ValidationMessageFor(model => model.Medium.MediaID)
+                </div>*@
+           
+    
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

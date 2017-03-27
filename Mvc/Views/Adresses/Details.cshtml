@@ -1,0 +1,83 @@
+﻿@model Mvc.Models.Adress
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Adress</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Customer.CustomerLastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Customer.CustomerLastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeliverableCountry.DeliverableCountryName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeliverableCountry.DeliverableCountryName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressCompany)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressCompany)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressLine1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressLine1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressLine2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressLine2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressZipCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressZipCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressActive)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.AdressID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

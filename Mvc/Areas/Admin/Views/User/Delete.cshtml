@@ -1,0 +1,80 @@
+﻿@model Mvc.Models.User
+
+@{
+    ViewBag.Title = "Delete";
+    
+    }
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Role.Rolename)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Role.Rolename)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserUsername)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserUsername)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserPassword)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserPassword)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserEmail)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserEmail)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserSalt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserSalt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserRegisterDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserRegisterDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UserLastLoginDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UserLastLoginDate)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> 
+            @Html.ActionLink("Back to List", "Index","Management")
+        </div>
+    }
+</div>

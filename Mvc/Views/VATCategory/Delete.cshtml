@@ -1,0 +1,42 @@
+﻿@model Mvc.Models.VATCategory
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <fieldset>
+        <legend>VATCategory</legend>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.VATCategoryName)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.VATCategoryName)
+        </div>
+    
+        <div class="display-label">
+             @Html.DisplayNameFor(model => model.VATCategoryValue)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.VATCategoryValue)
+        </div>
+    </fieldset>
+    @using (Html.BeginForm()) {
+        <p>
+            @Html.HiddenFor(model=>model.VATCategoryID)
+            <input type="submit" value="Delete" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    }
+
+</body>
+</html>

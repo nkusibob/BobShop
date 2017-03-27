@@ -1,0 +1,171 @@
+﻿@model Mvc.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+ 
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Create</title>
+</head>
+<body>
+   
+    <h2>Create</h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.ValidationSummary(true)
+
+        <fieldset>
+            <legend>Produit</legend>
+
+            @*BARCODE*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductBarCode)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductBarCode)
+                @Html.ValidationMessageFor(model => model.ProductBarCode)
+            </div>
+
+            @*NAME*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductName)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductName)
+                @Html.ValidationMessageFor(model => model.ProductName)
+            </div>
+
+            @*UNIT TYPE*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UnitTypeID)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.UnitTypeID)
+                @Html.DropDownList("UnitTypeID", (IEnumerable<SelectListItem>)(ViewBag.UnitTypes))
+            </div>
+
+
+            @*CATEGORY*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CategoryID)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.CategoryID)
+                @Html.DropDownList("CategoryID", (IEnumerable<SelectListItem>)(ViewBag.Categories))
+            </div>
+
+            @*VAT CATEGORY*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VATCategoryID)
+            </div>
+            <div class="editor-field">
+                @Html.ValidationMessageFor(model => model.VATCategoryID)
+                @Html.DropDownList("VATCategoryID", (IEnumerable<SelectListItem>)(ViewBag.VATCategories))
+            </div>
+
+            @*DESCRIPTION*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductDescription)
+            </div>
+
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductDescription)
+                @Html.ValidationMessageFor(model => model.ProductDescription)
+            </div>
+
+            @*MANUFACTURER REFERENCE*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductManufacturerReference)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductManufacturerReference)
+                @Html.ValidationMessageFor(model => model.ProductManufacturerReference)
+            </div>
+
+            @*ADDING DATE*@
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductAddingDate)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductAddingDate, DateTime.Now.Date)
+
+                @Html.ValidationMessageFor(model => model.ProductAddingDate)
+
+            </div>
+
+            @*MEDIA TYPE*@
+            <div class="editor-label">
+                @Html.LabelFor(model =>model.ProductMedias)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.ProductMedias)
+                @Html.ValidationMessageFor(model => model.ProductMedias)
+            </div>
+            @*<div class="editor-label">
+                @Html.LabelFor(model => model.Prices)
+            </div>
+            <div class="editor-field" style="color: red">
+                @Html.EditorFor(model => model.Prices)
+                @Html.ValidationMessageFor(model => model.Prices)
+            </div>*@
+            <div class="editor-label">
+                Price
+            </div>
+            <div class="editor-field">
+                <input type="number" name="priceEditor" value="@ViewBag.lastPrice" />
+            </div>
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductLongDescription)
+            </div>
+            <div class="editor-field">
+                <div class="editor-field" style="color: red">
+                    @Html.EditorFor(model => model.ProductLongDescription)
+                    @Html.ValidationMessageFor(model => model.ProductLongDescription)
+                </div>
+
+                <div class="editor-label">
+                    @Html.LabelFor(model => model.ProductReference)
+                </div>
+                <div class="editor-field">
+                    <div class="editor-field" style="color: red">
+                        @Html.EditorFor(model => model.ProductReference)
+                        @Html.ValidationMessageFor(model => model.ProductReference)
+                    </div>
+                </div>
+            </div>
+
+
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ProductDiscontinued)
+            </div>
+            <div class="editor-field">
+                <div class="editor-field" style="color: red">
+                    @Html.EditorFor(model => model.ProductDiscontinued)
+                    @Html.ValidationMessageFor(model => model.ProductDiscontinued)
+                </div>
+            </div>
+
+
+            <p>
+                <input type="submit" value="Create" />
+            </p>
+        </fieldset>
+    }
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>
+

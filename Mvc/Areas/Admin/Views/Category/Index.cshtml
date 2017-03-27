@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Mvc.Models.Category>
+
+@using Mvc.Helpers;
+@using Mvc.Models;
+   
+    
+    
+   
+    <body>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryDescription)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CategoryIsMenu)
+                </th>
+                <th>
+
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(item.CategoryName, "Details", "Category", new { id = item.CategoryID }, null)
+
+                    </td>
+                    <td>
+                        @Html.Truncate(item.CategoryDescription, 20)
+
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryIsMenu)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.CategoryID }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.CategoryID })
+                    </td>
+
+                </tr>
+            }
+
+        </table>
+    </body>
+</html>
+

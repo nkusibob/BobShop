@@ -1,0 +1,230 @@
+﻿@model Mvc.Models.IndexViewModel
+@{
+    ViewBag.Title = "Manage your account";
+}
+
+<h2>@ViewBag.Title</h2>
+<br />
+<br />
+<table>
+    <tr>
+        <td>
+            <div style="width: 400px">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Account
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CorrespondingUser.UserEmail)
+                    </dd>
+                    <dt>
+                        Username@*@Html.DisplayNameFor(model => model.CorrespondingUser.UserUsername)*@
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CorrespondingUser.UserUsername) ( @Html.ActionLink("Modify", "Edit", "User", new { id = Model.CorrespondingUser.UserID }, null) )
+                    </dd>
+                </dl>
+            </div>
+        </td>
+
+        <td>
+            <div class="row">
+                <dl class="dl-horizontal">
+                    <dt>
+                        
+                    </dt>
+                    <dd>
+                        @if (Model.HasPassword)
+                        {
+                            @Html.ActionLink("Change your password", "ChangePassword")
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Pick a password", "SetPassword")
+                        }
+                    </dd>
+                    </dl>
+</div>
+        </td>
+</table>
+<p>
+    <br />
+<p class="text-success">@ViewBag.StatusMessage</p>
+        Phone Number: @(Model.PhoneNumber ?? "None") [
+        @if (Model.PhoneNumber != null)
+        {
+            @Html.ActionLink("Change", "AddPhoneNumber")
+            @: &nbsp;|&nbsp;
+            @Html.ActionLink("Remove", "RemovePhoneNumber")
+        }
+        else
+        {
+            @Html.ActionLink("Add", "AddPhoneNumber")
+        }
+        ]
+
+        </p>
+
+
+    <hr class="style-one" />
+
+    <h3>CUSTOMER INFOS</h3>
+    <br />
+    @if (Model.CorrespondingUser.Customers.Count() != 0)
+    {
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorrespondingUser.Customers.FirstOrDefault().CustomerFirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorrespondingUser.Customers.FirstOrDefault().CustomerLastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CorrespondingUser.Customers.FirstOrDefault().CustomerCompany)
+                </th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.CorrespondingUser.Customers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerFirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerLastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CustomerCompany)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", "Customer", new { id = item.CustomerID }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    }
+    else
+    {
+    <br /><text>There is no customer address associated to this account.</text>}
+    <br />
+    @Html.ActionLink("Add a new customer to this account", "Create", "Customer")
+    <br />
+
+    @*<p>
+            External Logins: @Model.Logins.Count
+            @Html.ActionLink("[Manage]", "ManageLogins")
+        </p>
+        @if (Model.TwoFactor)
+        {
+            <form method="post" action="/Manage/DisableTFA">
+                <p>
+                    Two factor is currently enabled:
+                    <input type="submit" value="Disable" class="btn btn-default"/>
+                </p>
+            </form>
+        }
+        else
+        {
+            <form method="post" action="/Manage/EnableTFA">
+                <p>
+                    Two factor is currently disabled:
+                    <input type="submit" value="Enable" class="btn btn-default"/>
+                </p>
+            </form>
+        }
+        @if (Model.BrowserRemembered)
+        {
+            <form method="post" action="/Manage/ForgetBrowser">
+                <p>
+                    Browser is curently remembered for two factor:
+                    <input type="submit" value="Forget Browser" class="btn btn-default" />
+                </p>
+            </form>
+        }
+        else
+        {
+            <form method="post" action="/Manage/RememberBrowser">
+                <p>
+                    Browser is curently not remembered for two factor:
+                    <input type="submit" value="Remember Browser" class="btn btn-default"/>
+                </p>
+            </form>
+        }*@
+    <br />
+    <hr class="style-one" />
+
+    <h3>ADDRESSES INFOS</h3>
+    <br />
+    @if (Model.CorrespondingUser.Customers.Where(c => c.Adresses.Count() != 0).Count() != 0)
+    {
+        foreach (var cust in Model.CorrespondingUser.Customers.Where(c => c.Adresses.Count() != 0))
+        {
+            <b>@String.Format("{0} {1} ({2})", cust.CustomerFirstName, cust.CustomerLastName, cust.CustomerCompany)</b>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CorrespondingUser.Customers.FirstOrDefault().Adresses.FirstOrDefault().AdressCompany)
+                    </th>
+                    <th>
+                        Address@*@Html.DisplayNameFor(model => model.CorrespondingUser.Customers.FirstOrDefault().Adresses.FirstOrDefault().AdressLine1)*@
+                    </th>
+                    <th></th>
+                </tr>
+                @foreach (var item in cust.Adresses)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdressCompany)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AdressLine1) <br />@Html.DisplayFor(modelItem => item.AdressZipCode) @Html.DisplayFor(modelItem => item.AdressLine2)<br />
+                            @Html.DisplayFor(modelItem => item.DeliverableCountry.DeliverableCountryName)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "Edit", "Adresses", new { id = item.AdressID }, null)
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    }
+    else
+    {
+    <br /><text>There are no addresses associated to any exisiting customer.</text>}
+    <br />
+    @Html.ActionLink("Add a new address", "Create", "Adresses")
+    <br /><br /><br /><hr class="style-one" />
+<table>
+    <tr>
+        <td>
+            <div style="width: 400px">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Last Login Date
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CorrespondingUser.UserLastLoginDate)
+                    </dd>
+                </dl>
+            </div>
+        </td>
+
+        <td>
+            <div class="row">
+                <dl class="dl-horizontal">
+                    <dt>
+                        Registering Date
+                    </dt>
+                    <dd>
+                        @Html.DisplayFor(model => model.CorrespondingUser.UserRegisterDate)
+                    </dd>
+                </dl>
+            </div>
+        </td>
+</table>
+
+
+

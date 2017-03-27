@@ -1,0 +1,208 @@
+﻿@model Mvc.Models.ShoppingCart
+
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Mvc.Models;
+<div class="container main-container">
+    <div class="row">
+
+        <h2>Shopping Cart</h2>
+        <div class="col-lg-3 col-md-3 col-sm-12">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="no-padding">
+                    <span class="title">BEST SELLER</span>
+                </div>
+                <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center">
+                    <a href="detail.html" class="link-p" style="overflow: hidden; position: relative;">
+                        <img src="images/product-8.jpg" alt="" class="def-img" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -13px; top: 0px;">
+                    </a>
+                    <div class="caption prod-caption">
+                        <h4><a href="detail.html">Penn State College T-Shirt</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                        <p>
+                        </p><div class="btn-group">
+                            <a href="#" class="btn btn-default">$ 528.96</a>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+                <div class="thumbnail col-lg-12 col-md-12 col-sm-6 visible-sm text-center">
+                    <a href="detail.html" class="link-p" style="overflow: hidden; position: relative;">
+                        <img src="images/product-9.jpg" alt="" class="def-img" style="position: absolute; width: auto; height: auto; max-width: none; max-height: none; left: 50px; top: 0px;">
+                    </a>
+                    <div class="caption prod-caption">
+                        <h4><a href="detail.html">Ohio State College T-Shirt</a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                        <p>
+                        </p><div class="btn-group">
+                            <a href="#" class="btn btn-default">$ 924.25</a>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Buy</a>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-9 col-md-9 col-sm-12">
+            @if (Model.CartLine.Count() != 0)
+            {
+                <table class="table table-bordered tbl-cart">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CartLine.Values.FirstOrDefault().product.Medium)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CartLine.Values.FirstOrDefault().productname)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CartLine.Values.FirstOrDefault().quantity)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CartLine.Values.FirstOrDefault().price)
+                            </th>
+                            <th>
+                                Sub Total
+                            </th>
+                            <th>
+
+                            </th>
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model.CartLine)
+                    {
+                        <tr>
+                            <td>
+                                <a>
+                                    <img src="@Html.DisplayFor(modelItem => item.Value.product.ProductMedias.FirstOrDefault().Medium.MediaUrl)" width="47" height="47" alt="Alternate Text" />
+                                </a>
+                            </td>
+                            <td>
+                                @Html.ActionLink(item.Value.productname, "Details", "Product", new { id = item.Value.productid }, null)
+                            </td>
+                            <td>
+
+                                @Html.TextBoxFor(modelItem => item.Value.quantity, new { id = item.Value.productid, @class = "inputQty", @type = "number" })
+                                @Html.ActionLink("update", "Edit", new { id = item.Value.productid, quantity = 1 }, new { @class = "btn btn-primary", @id = "UpdateCart" + item.Value.productid })
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Value.price)
+                            </td>
+                            <td>
+                                @(Math.Round(item.Value.price * item.Value.quantity, 2))
+                            </td>
+                            <td>
+                                <a href="@Url.Action("delete", "Cart",new { id = item.Value.productid})">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>
+
+                        </tr>
+
+                    }
+                    <tr>
+                        <td colspan="4" align="right">Total</td>
+                        <td class="total" colspan="2">
+                            <b>@Math.Round(Model.CartTotal, 2) €</b>
+                        </td>
+                    </tr>
+                </table>
+                <div class="btn-group btns-cart">
+
+                    <button type="button" class="btn btn-primary" onclick="window.location = '/Home/Index'">
+                        <i class="fa fa-arrow-circle-left"></i> Continue Shopping
+                    </button>
+                    <button type="button" class="btn btn-primary">Update Cart</button>
+
+
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="@Url.Action("Index", "CmdLine")" class="btn btn-primary">
+                            check out
+                            <i class="fa fa-arrow-circle-right"></i>
+
+                        </a>
+                                @*<button class="btn btn-primary">
+                                        @Html.ActionLink("check out", "Index", "CmdLine", null, new { @class = "btn btn-primary" })
+
+                                        <i class="fa fa-arrow-circle-right"></i>
+                                    </button>*@
+                    }
+                    else
+                    { <a href="@Url.Action("LogIn", "Account")" class="btn btn-primary">
+                        Login In and Check Outheck out
+                        <i class="fa fa-arrow-circle-right"></i>
+
+                    </a>
+
+
+                    }
+
+
+                </div>
+            }
+            else
+            { <br /><text>Your cart is empty !</text>}
+            <br />
+
+            @*@if (ViewBag.customer != null)
+                {
+                    <h3>Select customer</h3>
+                    <div>
+
+                        @Html.DropDownList("customer", (IEnumerable<SelectListItem>)(ViewBag.customer))
+                    </div>
+                }
+
+                @if (ViewBag.customerAdress != null)
+                {
+                    <h3>Select Delivery adress</h3>
+                    <div>
+
+                        @Html.DropDownList("Adress", (IEnumerable<SelectListItem>)(ViewBag.customerAdress))
+                    </div>
+                }*@
+            @*<div align="right">
+                    Total : <strong>@Math.Round(Model.CartTotal, 2) €</strong>
+                    <br />
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @Html.ActionLink("Check Out", "Index", "CmdLine", null, new { @class = "btn btn-primary" })
+                    }
+                    else
+                    {
+                        @Html.ActionLink("Login In and Check Out", "LogIn", "Account", null, new { @class = "btn btn-primary" })
+                    }
+
+                </div>*@
+
+        </div>
+    </div>
+</div>
+<br />
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var myQty;
+            var startvalue = $(this).val;
+            //prends  changement dans la quantité de n'importe quel produit
+            $(".inputQty").change(function () {
+                //recupères l'id du produit changé
+                var id = $(this).attr("id");
+                //recupères la quantité changé
+                var qty = $(this).val();
+                console.log(startvalue);
+                //recupère l'attribut href du lien #UpdateCart pour lui ajouter l'id du produit et la quantité
+                $("#UpdateCart" + id).attr("href", 'Cart/Create/' + id + '/' + qty);
+
+            });
+        });
+    </script>
+
+}

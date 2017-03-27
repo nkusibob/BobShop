@@ -1,0 +1,155 @@
+﻿@model IEnumerable<Mvc.Models.Category>
+
+@using Mvc.Helpers;
+
+@{
+    ViewBag.Title = "Produits";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Liste des Produits</h2>
+
+<p>
+   consultez l'admin pour créer une categorie
+</p>
+
+@foreach (var category in Model) { 
+    <table class="table" >
+         <caption><h4>@category.CategoryName</h4></caption>
+        <tr>
+            <th>
+                Name @*@Html.DisplayNameFor(cat =>cat.Product.ProductName)*@
+            </th>
+            <th>
+                Added Date
+            </th>
+            <th>
+                Media type
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+            </th>
+        </tr>
+    @foreach (var item in category.Products) { 
+            <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductAddingDate)
+        </td>
+        <td>
+       @Html.DisplayFor(modelItem => item.Medium.ElementAt(0).MediaType.MediaTypeName)
+        </td>
+        <td>
+            @Html.Truncate(item.ProductDescription,25)
+        </td>
+        
+        @*<td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>*@
+    </tr>
+    }
+    </table>
+}
+
+
+
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductLongDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductReference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductManufacturerReference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductBarCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductAddingDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductDiscontinued)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VATCategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UnitTypeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MediaID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Medium.MediaTypeID)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductLongDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductManufacturerReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductBarCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductAddingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProductDiscontinued)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VATCategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.UnitTypeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MediaID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Medium.MediaType.MediaTypeID)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
+        </td>
+    </tr>
+}
+
+</table>*@

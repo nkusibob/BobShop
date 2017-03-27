@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6834be5640b6490b8cf1002c06a4a527" Name="Diagram1" ZoomLevel="62">
+        <!--<AssociationConnector Association="vendrModel.FK_Product_Media" />-->
+        <AssociationConnector Association="vendrModel.ProductMedia" />
+        <EntityTypeShape EntityType="vendrModel.C__MigrationHistory" PointX="9.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Adress" PointX="5.25" PointY="17.5" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Application" PointX="11.75" PointY="4.5" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.AspNetRole" PointX="9.75" PointY="15.5" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.AspNetUserClaim" PointX="14.25" PointY="14" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.AspNetUserLogin" PointX="14.25" PointY="16.75" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.AspNetUser" PointX="12" PointY="14.375" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Category" PointX="5.25" PointY="7" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Command" PointX="7.5" PointY="11.625" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.CommandLine" PointX="9.75" PointY="10.125" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.CommandStatu" PointX="5.25" PointY="10.125" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Customer" PointX="3" PointY="19.25" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.DeliverableCountry" PointX="3" PointY="16.625" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.DeliverablePrice" PointX="5.25" PointY="22.5" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Medium" PointX="3" PointY="5.5" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.MediaType" PointX="0.75" PointY="6" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Membership" PointX="14" PointY="3" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.parametre" PointX="0.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Price" PointX="9.75" PointY="7.25" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Product" PointX="7.5" PointY="6" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.ProductMedia" PointX="5.25" PointY="3.875" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Profile" PointX="18.5" PointY="7.375" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.Role" PointX="14" PointY="10.25" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.sysdiagram" PointX="7.75" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.UnitType" PointX="5.25" PointY="13.625" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.User" PointX="0.75" PointY="19.25" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.User1" PointX="16.25" PointY="7" Width="1.5" />
+        <EntityTypeShape EntityType="vendrModel.VATCategory" PointX="5.25" PointY="1" Width="1.5" />
+        <AssociationConnector Association="vendrModel.FK_Adress_Customer" />
+        <AssociationConnector Association="vendrModel.FK_Adress_DeliverableCountry" />
+        <AssociationConnector Association="vendrModel.FK_Command_DeliveryAdress" />
+        <AssociationConnector Association="vendrModel.FK_Command_InvoiceAdress" />
+        <AssociationConnector Association="vendrModel.MembershipApplication" />
+        <AssociationConnector Association="vendrModel.RoleApplication" />
+        <AssociationConnector Association="vendrModel.UserApplication" />
+        <AssociationConnector Association="vendrModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="vendrModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="vendrModel.FK_Category_Media" />
+        <AssociationConnector Association="vendrModel.FK_Product_Category" />
+        <AssociationConnector Association="vendrModel.FK_Command_CommandStatus" />
+        <AssociationConnector Association="vendrModel.FK_CommandLine_Command" />
+        <AssociationConnector Association="vendrModel.FK_CommandLine_Product" />
+        <AssociationConnector Association="vendrModel.FK_CommandStatus_Media" />
+        <AssociationConnector Association="vendrModel.FK_Customer_User" />
+        <AssociationConnector Association="vendrModel.FK_DeliverablePrice_DeliverableCountry" />
+        <AssociationConnector Association="vendrModel.FK_Media_MediaType" />
+        <AssociationConnector Association="vendrModel.FK_ProductMedia_Media1" />
+        <AssociationConnector Association="vendrModel.MembershipUser" />
+        <AssociationConnector Association="vendrModel.FK_Price_Product" />
+        <AssociationConnector Association="vendrModel.FK_Product_UnitType" />
+        <AssociationConnector Association="vendrModel.FK_Product_VATCategory" />
+        <AssociationConnector Association="vendrModel.FK_ProductMedia_Product1" />
+        <AssociationConnector Association="vendrModel.UserProfile" />
+        <AssociationConnector Association="vendrModel.AspNetUserRoles" />
+        <AssociationConnector Association="vendrModel.UsersInRoles" />
+        <!--<EntityTypeShape EntityType="vendrModel.ProductMedia" Width="1.5" PointX="10.375" PointY="9.75" />-->
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

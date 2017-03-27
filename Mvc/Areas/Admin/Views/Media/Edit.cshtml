@@ -1,0 +1,62 @@
+﻿@model Mvc.Models.Medium
+
+@{
+    ViewBag.Title = "Edit";
+  
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>Medium</h4>
+        <hr />
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.MediaID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MediaName, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MediaName)
+                @Html.ValidationMessageFor(model => model.MediaName)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MediaAlt, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MediaAlt)
+                @Html.ValidationMessageFor(model => model.MediaAlt)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MediaUrl, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MediaUrl)
+                @Html.ValidationMessageFor(model => model.MediaUrl)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MediaTypeID, "MediaTypeID", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("MediaTypeID", String.Empty)
+                @Html.ValidationMessageFor(model => model.MediaTypeID)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

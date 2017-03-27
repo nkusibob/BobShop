@@ -1,0 +1,113 @@
+@model Mvc.Models.Product
+
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using Mvc.Models;
+
+
+
+
+
+<div class="col-lg-12 col-sm-12 hero-feature">
+
+    @if (Model.Medium.Count > 0)
+    {
+        <div class="sp-wrap" style="margin:4px 4px 4px 4px" >
+            @foreach (Medium medium in Model.Medium)
+            {
+                if (medium.MediaTypeID == 1)
+                {
+                    <a href="@medium.MediaUrl">
+                        <img src="@medium.MediaUrl" width="269" />
+                    </a>
+                }
+                else if (medium.MediaTypeID == 2)
+                {
+                    <video src="@medium.MediaUrl"  controls autoplay="autoplay" width="252" style="margin-bottom:8px">
+                        <source src="@medium.MediaUrl" type="video/webm" />
+                       
+                    </video>
+                }
+
+            }
+        </div>
+    }
+    <div class="display-label" style="display: inline-block" ;>
+        <h4> @Html.DisplayNameFor(model => model.ProductName)</h4>
+    </div>
+    <div class="display-field">
+        <span style="color:#428BCA"> @Html.DisplayFor(model => model.ProductName, new { @style = "color:#428BCA" })</span>
+    </div>
+    <hr>
+
+
+    <h3>@Html.DisplayFor(model => model.Prices.FirstOrDefault().PriceValue) €</h3>
+
+    <div class="col-md-2">
+        <input id="demo1" type="text" name="demo1">
+    </div>
+
+
+    <div class="input-qty-detail">
+        <div class="input-group bootstrap-touchspin">
+            @* <span class="input-group-btn">
+                <span class="input-group-addon bootstrap-touchspin-prefix">@Model.UnitType.UnitTypeName @if(Model.UnitType.UnitTypeSymbol.Length!=0){<textarea>(</textarea>@Model.UnitType.UnitTypeSymbol<textarea>)</textarea>}</span>
+                <button class="btn btn-default bootstrap-touchspin-down" type="button">-</button></span>*@
+            @*<input type="text" class="form-control input-qty text-center" value="1" name="demo1">*@
+            @*<span class="input-group-btn">
+                <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button></span>*@
+        </div>
+        @Html.ActionLink("Update", "Create", "Cart", new { id = Model.ProductID, quantity = 1 }, new { @class = "btn btn-primary", @id = "addToCart" })
+
+
+    </div>
+
+</div>
+<div class="display-field">
+    <h4> @Html.DisplayFor(model => model.ProductLongDescription)</h4>
+</div>
+
+
+@section scripts{
+    @{String unit = Model.UnitType.UnitTypeName + ((Model.UnitType.UnitTypeSymbol.Length!=0) ? "("+@Model.UnitType.UnitTypeSymbol + ")" : "");}
+    <script src="~/Scripts/js/bootstrap.touchspin.js"></script>
+    <script>
+        var startValue;
+
+        $("input[name='demo1']").TouchSpin({
+            min: 1,
+            max: 100000,
+            step: 1,
+            decimals: 0,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '@Model.UnitType.UnitTypeSymbol'
+        });
+
+        $("input[name='demo1']").on("change", function () {
+            var element = $('#addToCart');
+            var currentValue = $("input[name='demo1']").val();
+            element.removeClass('disabled');
+            element.attr('href', '/Cart/Create/' + @Model.ProductID + '/' + $("input[name='demo1']").val());
+
+            console.log(currentValue + ' // ' + startValue);
+            if (currentValue == startValue) {
+                element.addClass('disabled');
+            }
+        });
+
+        @*$.ajax({
+                type: "GET",
+                url: "http://localhost:50722/Cart/GetQuantity?id=" + @Model.ProductID,
+                success: function(data){
+                    startValue = data.quantity;
+
+                    $("input[name='demo1']").val(data.quantity);
+                    $('#addToCart').attr('href', '/Cart/Create/' + @Model.ProductID + '/' + $("input[name='demo1']").val());
+                }
+            });*@
+    </script>
+}

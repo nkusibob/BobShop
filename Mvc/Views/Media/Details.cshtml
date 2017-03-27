@@ -1,0 +1,51 @@
+﻿@model Mvc.Models.Medium
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Medium</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaAlt)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaAlt)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaUrl)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaUrl)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MediaType.MediaTypeName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MediaType.MediaTypeName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MediaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

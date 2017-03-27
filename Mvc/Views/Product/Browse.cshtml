@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Mvc.Models.Product>
+@{
+    ViewBag.Title = "Search";
+
+}
+@*--------------------------Affichage des products---------------------------*@
+<br />
+<div class="col-lg-9 col-md-9 col-sm-12">
+    <div class="col-lg-12 col-sm-12">
+        <span class="title">@Model.Count() PRODUCT(S) FOUND</span>
+    </div>
+
+    @foreach (var p in Model)
+    {
+        <div class="col-lg-4 col-sm-4 hero-feature text-center">
+            <div class="thumbnail">
+                <a href="@Url.Action("Details", "Product", new { id = p.ProductID })" class="link-p" style="overflow: hidden; position: relative;">
+
+
+                    @if (p.Medium.Count > 0)
+                    {
+                        <img src="@p.Medium.First().MediaUrl" alt="" style="position: absolute; width: auto; height: 257px; max-width: none; max-height: none; left: 1px; top: 0px;">
+                    }
+                </a>
+                <div class="caption prod-caption" style=" width auto; height 140px;">
+                    <h4><a href="@Url.Action("Details", "Product", new { id = p.ProductID })">@p.ProductName.Substring(0, 1).ToUpper()@p.ProductName.Substring(1).ToLower()</a></h4>
+                    <p style="width: auto; height: 25%;">@p.ProductDescription</p>
+                    <p>
+                    </p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">@p.Prices.OrderBy(pr => pr.PriceDate).FirstOrDefault().PriceValue</a>
+                        @*                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>*@
+                        @Html.ActionLink("Buy!", "Create", "Cart", new { id = p.ProductID, quantity = 1 }, new { @class = "btn btn-primary" })
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+</div>
+    

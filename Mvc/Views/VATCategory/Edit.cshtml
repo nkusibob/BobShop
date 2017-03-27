@@ -1,0 +1,53 @@
+﻿@model Mvc.Models.VATCategory
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Edit</title>
+</head>
+<body>
+    <script src="~/Scripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    
+    @using (Html.BeginForm()) {
+        @Html.ValidationSummary(true)
+    
+        <fieldset>
+            <legend>VATCategory</legend>
+    
+            @Html.HiddenFor(model => model.VATCategoryID)
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VATCategoryName)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.VATCategoryName)
+                @Html.ValidationMessageFor(model => model.VATCategoryName)
+            </div>
+    
+            <div class="editor-label">
+                @Html.LabelFor(model => model.VATCategoryValue)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.VATCategoryValue)
+                @Html.ValidationMessageFor(model => model.VATCategoryValue)
+            </div>
+    
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    }
+    
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+</body>
+</html>

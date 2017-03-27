@@ -1,0 +1,142 @@
+﻿@model Mvc.Models.Product
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+@using Mvc.Models;
+ 
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<h2>Details</h2>
+<div class="col-lg-12 col-sm-12 hero-feature">
+    
+    <div>
+
+        <h4>Product</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductLongDescription)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductLongDescription)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductReference)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductReference)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductManufacturerReference)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductManufacturerReference)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductBarCode)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductBarCode)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductAddingDate)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductAddingDate)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.ProductDiscontinued)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.ProductDiscontinued)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Category.CategoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Category.CategoryName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UnitType.UnitTypeName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UnitType.UnitTypeName)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VATCategory.VATCategoryName)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VATCategory.VATCategoryName)
+            </dd>
+
+        </dl>
+    </div>
+   
+       
+        @if (Model.Medium.Count > 0) { 
+        <div class="sp-wrap">
+            @foreach (Medium medium in Model.Medium)
+            {
+                if (medium.MediaTypeID == 1)
+                {
+                    <a href="@medium.MediaUrl">
+                        <img src="@medium.MediaUrl" width="260" />
+                    </a>
+                }
+                else if (medium.MediaTypeID == 2)
+                {
+                    <a href="@medium.MediaUrl">
+                        <img src="@medium.MediaUrl" width="260" />
+
+                        <video src="@medium.MediaUrl" width="220" height="140" controls autoplay="autoplay">
+                            <source src="@medium.MediaUrl" type="video/mp4" />
+                        </video>
+                    </a>
+                }
+            }
+           
+        </div>
+        }
+    </div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProductID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

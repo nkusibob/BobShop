@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Mvc.Models.VATCategory>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.VATCategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VATCategoryValue)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.VATCategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.VATCategoryValue)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id=item.VATCategoryID }) |
+                @Html.ActionLink("Details", "Details", new { id=item.VATCategoryID }) |
+                @Html.ActionLink("Delete", "Delete", new { id=item.VATCategoryID })
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

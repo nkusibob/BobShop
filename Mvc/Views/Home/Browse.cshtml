@@ -1,0 +1,213 @@
+﻿@model IEnumerable<Mvc.Models.Product>
+@{
+    ViewBag.Title = "Accueil";
+    
+}
+
+
+
+
+@*-----------------------INNER NAVBAR (suppr la query)-------------------------------*@
+<br />
+<div class="navbar navbar-inverse">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            @*                <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>*@
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li>@Html.ActionLink("Categories", "Index","Category")</li>
+                </ul>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+
+@*--------------------------Affichage des products---------------------------*@
+<br />
+<div class="col-lg-9 col-md-9 col-sm-12">
+        		<div class="col-lg-12 col-sm-12">
+            		<span class="title">@Model.Count() PRODUCT(S) FOUND</span>
+            	</div>
+
+@foreach (var p in Model)
+{
+    <div class="col-lg-4 col-sm-4 hero-feature text-center">
+        <div class="thumbnail">
+            <a href="@Url.Action("Details", "Product", new { id = p.ProductID })" class="link-p" style="overflow: hidden; position: relative;">
+                <img src="@p.Medium.ElementAt(0).MediaUrl" alt="" style="position: absolute; width: auto; height: 257px; max-width: none; max-height: none; left: 1px; top: 0px;">
+            </a>
+            <div class="caption prod-caption">
+                <h4><a href="@Url.Action("Details", "Product", new { id = p.ProductID })">@p.ProductName</a></h4>
+                <p>@p.ProductDescription</p>
+                <p>
+                </p>
+                <div class="btn-group">
+                    <a href="#" class="btn btn-default">@p.Prices.FirstOrDefault().PriceValue</a>
+@*                    <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>*@
+                    @Html.ActionLink("Buy!", "Create", "Cart", new { productid = @p.ProductID }, new {@class="btn btn-primary" })
+                </div>
+                <p></p>
+            </div>
+        </div>
+    </div>
+}
+    </div>
+    
+@*<ul class="thumbnails">*@
+
+        @*<li class="span1">
+            <div class="thumbnail">
+                <img data-src="holder.js/300x200" alt="300x200" src="@item.Medium.MediaUrl" style="width: 300px">
+                <div class="caption">
+                    <h3>@item.ProductName</h3>
+                    <p>@item.ProductDescription</p>
+                    <p>
+                        <a href="#" class="btn btn-primary">Ajouter au panier</a>@* <a href="#" class="btn">Action</a></p>*@
+                @*</div>
+            </div>
+        </li>
+</ul>*@
+@*<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-12">
+
+        <!-- Best Seller -->
+        <div class="col-lg-12 col-md-12 col-sm-12 visible-lg visible-md">
+            <div class="no-padding">
+                <span class="title">BEST SELLER</span>
+            </div>
+            <div class="thumbnail col-lg-12 col-md-12 col-sm-6 text-center">
+                <a href="http://localhost:50722/Home/Details/9" class="link-p" style="overflow: hidden; position: relative;">
+                    <img src="http://cognitic.be/wp-content/uploads/2013/04/asp-dotnet.png"
+                        alt="" style="position: absolute; width: 250px; height: auto; max-width: none; max-height: none; left: -13px; top: 0px;" />
+
+                </a>
+                <div class="caption prod-caption">
+                    <h4><a href="detail.html">Penn State College T-Shirt</a></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                    <p>
+                    </p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">$ 528.96</a>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+            <div class="thumbnail col-lg-12 col-md-12 col-sm-6 hidden-xs text-center">
+                <a href="detail.html" class="link-p" style="overflow: hidden; position: relative;">
+                    <img src="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg"
+                        alt="" style="position: absolute; width: 280px; height: auto; max-width: none; max-height: none; left: -28px; top: 0px;">
+                </a>
+                <div class="caption prod-caption">
+                    <h4><a href="detail.html">Ohio State College T-Shirt</a></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                    <p>
+                    </p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-default">$ 924.25</a>
+                        <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>
+                    </div>
+                    <p></p>
+                </div>
+            </div>
+        </div>
+        <!-- End Best Seller -->
+
+    </div>
+
+    <div class="clearfix visible-sm"></div>
+
+    <!-- Product Detail -->
+    <div class="col-lg-9 col-md-9 col-sm-12">
+        <div class="col-lg-12 col-sm-12">
+            <span class="title">Live Nation 3 Days of Peace and Music Carbon</span>
+        </div>
+        <div class="col-lg-12 col-sm-12 hero-feature">
+            <div class="sp-wrap" style="display: inline-block;">
+
+
+
+
+
+                <div class="sp-large">
+                    <a href="images/detail1.jpg" class="">
+                        <img src="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg" alt="">
+                    </a>
+                </div>
+                <div class="sp-thumbs sp-tb-active">
+                    <a href="images/detail1.jpg" class="sp-current">
+                        <img src="images/detail1-s.jpg" alt=""></a><a href="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg">
+                            <img src="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg" alt=""></a><a href="images/                                                   detail3.jpg"><img src="~/Content/images/banner_slider-1.jpg" alt="">
+                            </a>
+                    <a href="Home/Detail">
+                        <img src="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg" alt=""></a><a href="images/detail2.jpg"><img src="http://belleboggs.files.wordpress.com/2010/07/dsc03471.jpg" alt=""></a>
+                </div>
+            </div>
+            <h4>Live Nation 3 Days of Peace and Music Carbon</h4>
+            98 items in stock
+					<hr>
+            Actually this part of clothes is very unique and original. It is a way of self-expression because nowadays making some logo or phrase has become very popular. Obviously the T-shirts are the part of modern culture and they have a great influence on teens because of their freedom and epatage. We are offering you our unique and original products.
+					<hr>
+            <h3>$428.96</h3>
+            <div class="input-qty-detail">
+                <div class="input-group bootstrap-touchspin" style="">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default bootstrap-touchspin-down" type="button">-</button></span><span class="input-group-addon bootstrap-touchspin-prefix"></span><input type="text" class="form-control input-qty text-center" value="1"><span class="input-group-addon bootstrap-touchspin-postfix"></span><span class="input-group-btn">
+                            <button class="btn btn-default bootstrap-touchspin-up" type="button">+</button></span>
+                </div>
+                <button class="btn btn-primary pull-left">add to cart</button>
+            </div>
+            <br>
+            <hr>
+            <div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+                <a class="addthis_button_facebook addthis_button_preferred_1 at300b" title="Facebook" href="#"><span class=" at300bs at15nc at15t_facebook"><span class="at_a11y">Share on facebook</span></span></a>
+                <a class="addthis_button_twitter addthis_button_preferred_2 at300b" title="Tweet" href="#"><span class=" at300bs at15nc at15t_twitter"><span class="at_a11y">Share on twitter</span></span></a>
+                <a class="addthis_button_email addthis_button_preferred_3 at300b" target="_blank" title="Email" href="#"><span class=" at300bs at15nc at15t_email"><span class="at_a11y">Share on email</span></span></a>
+                <a class="addthis_button_print addthis_button_preferred_4 at300b" title="Print" href="#"><span class=" at300bs at15nc at15t_print"><span class="at_a11y">Share on print</span></span></a>
+                <a class="addthis_button_compact at300m" href="#"><span class=" at300bs at15nc at15t_compact"><span class="at_a11y">More Sharing Services</span></span></a>
+                <div class="atclear"></div>
+            </div>
+            <script type="text/javascript" src="http://s7.addthis.com/js/300/addthis_widget.js#pubid=xa-4f0c254f1302adf8"></script>
+            <div id="_atssh" style="visibility: hidden; height: 1px; width: 1px; position: absolute; z-index: 100000;">
+                <iframe id="_atssh478" title="AddThis utility frame" src="//ct1.addthis.com/static/r07/sh158.html#iit=1400588368208&amp;tmr=load%3D1400588347058%26core%3D1400588347098%26main%3D1400588368206%26ifr%3D1400588368211&amp;cb=0&amp;cdn=1&amp;chr=UTF-8&amp;kw=&amp;ab=-&amp;dh=&amp;dr=&amp;du=file%3A%2F%2F%2FC%3A%2FUsers%2FADMIN~1.PC-%2FAppData%2FLocal%2FTemp%2FRar%24EXa0.493%2Fdetail.html&amp;dt=Product%20Detail%20-%20Mimity&amp;dbg=0&amp;md=0&amp;cap=tc%3D0%26ab%3D0&amp;inst=1&amp;vcl=0&amp;jsl=1&amp;prod=undefined&amp;lng=nl&amp;ogt=&amp;pc=men&amp;pub=xa-4f0c254f1302adf8&amp;ssl=0&amp;sid=537b483be55d5b8d&amp;srpl=1&amp;srcs=1&amp;srd=1&amp;srf=1&amp;srx=1&amp;ver=300&amp;xck=0&amp;xtr=0&amp;og=&amp;aa=0&amp;csi=undefined&amp;rev=1399981304&amp;ct=1&amp;xld=1&amp;xd=1" style="height: 1px; width: 1px; position: absolute; z-index: 100000; border: 0px; left: 0px; top: 0px;"></iframe>
+            </div>
+            <script type="text/javascript" src="http://ct1.addthis.com/static/r07/core131.js"></script>
+        </div>
+        <div class="clearfix"></div>
+        <div class="col-lg-12 col-sm-12">
+            <span class="title">RELATED PRODUCTS</span>
+        </div>
+        @foreach (var p in Model)
+        { 
+            <div class="col-lg-4 col-sm-4 hero-feature text-center">
+                <div class="thumbnail">
+                    <a href="@Url.Action("Details", "Product", new { id = p.ProductID })" class="link-p" style="overflow: hidden; position: relative;">
+                        <img src="@p.Medium.MediaUrl" alt="" style="position: absolute; width: auto; height: 257px; max-width: none; max-height: none; left: 1px; top: 0px;">
+                    </a>
+                    <div class="caption prod-caption">
+                        <h4><a href="@Url.Action("Details", "Product", new { id = p.ProductID })">Adidas Men Blue &amp; Red Striped Polo T-shirt </a></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut, minima!</p>
+                        <p>
+                        </p>
+                        <div class="btn-group">
+                            <a href="#" class="btn btn-default">$ 22.22</a>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart"></i>Buy</a>
+                        </div>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <!-- End Product Detail -->
+
+
+</div>*@

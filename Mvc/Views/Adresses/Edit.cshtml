@@ -1,0 +1,104 @@
+﻿@model Mvc.Models.Adress
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Address</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.AdressID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdressCompany, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdressCompany, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdressCompany, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdressLine1, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdressLine1, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdressLine1, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdressLine2, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdressLine2, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdressLine2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.AdressZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.AdressZipCode, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AdressZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.AdressType, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AdressType)
+                        @Html.ValidationMessageFor(model => model.AdressType, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.AdressActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.AdressActive)
+                        @Html.ValidationMessageFor(model => model.AdressActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DeliverableCountryID, "DeliverableCountryID", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DeliverableCountryID", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DeliverableCountryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                @Html.LabelFor(model => model.CustomerID, "CustomerID", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("CustomerID", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+                </div>
+            </div>*@
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+        @Html.ActionLink("Back to your Account Management", "Index","Manage")
+    </div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

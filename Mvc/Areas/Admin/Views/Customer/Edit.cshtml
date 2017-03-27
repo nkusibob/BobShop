@@ -1,0 +1,83 @@
+﻿@model Mvc.Models.Customer
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Customer</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.CustomerID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerLastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerLastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerLastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerFirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerFirstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerFirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerCompany, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CustomerCompany, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CustomerCompany, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+                @Html.LabelFor(model => model.CustomerActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.CustomerActive)
+                        @Html.ValidationMessageFor(model => model.CustomerActive, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+  
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserID, "UserID", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("UserID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UserID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+        @Html.HiddenFor(model => model.UserID);
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+@*<div>
+    @Html.ActionLink("Create", "Create","Customer", new { id = Model.UserID }) |
+    @Html.ActionLink("Details", "Details", "Customer", new { id = Model.UserID }) |
+    @Html.ActionLink("Delete", "Delete", "Customer", new { id = Model.UserID })
+</div>
+<div>
+    @Html.ActionLink("Back to your Account Management", "Index", "Manage")
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
